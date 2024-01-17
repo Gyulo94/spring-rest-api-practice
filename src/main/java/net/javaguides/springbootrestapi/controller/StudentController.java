@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -53,12 +54,21 @@ public class StudentController {
         return new Student(id, firstName, lastName);
     }
 
-    // Spring boot REST API that handles HTTP POST Request
+    // Spring boot REST API that handles HTTP POST Request - creating new resource
     // @PostMapping and @RequestBody
     @PostMapping("students/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student) {
         System.out.println(student.getId());
+        System.out.println(student.getFirstName());
+        System.out.println(student.getLastName());
+        return student;
+    }
+
+    // Spring boot REST API that handles HTTP PUT Request - updating existing
+    // resource
+    @PutMapping("students/{id}/update")
+    public Student updateStudent(@RequestBody Student student, @PathVariable("id") int studentId) {
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
         return student;
